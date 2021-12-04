@@ -14,6 +14,8 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
+
 function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
@@ -26,7 +28,6 @@ function RenderCampsite({ campsite }) {
     </div>
   );
 }
-
 function RenderComments({ comments, addComment, campsiteId }) {
   if (comments) {
     return (
@@ -67,7 +68,6 @@ class CommentForm extends React.Component {
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
-
   handleSubmit = values => {
     this.toggleModal();
     this.props.addComment(
@@ -77,7 +77,6 @@ class CommentForm extends React.Component {
       values.text
     );
   };
-
   render() {
     return (
       <>
@@ -151,7 +150,28 @@ class CommentForm extends React.Component {
     );
   }
 }
+
 function CampsiteInfo(props) {
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  }
+  if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h4>{props.errMess}</h4>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (props.campsite) {
     return (
       <div className="container">
