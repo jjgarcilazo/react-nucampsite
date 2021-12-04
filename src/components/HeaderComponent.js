@@ -17,6 +17,7 @@ import {
   Label,
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -24,23 +25,26 @@ class Header extends Component {
       isNavOpen: false,
       isModalOpen: false,
     };
+    this.toggleNav = this.toggleNav.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  toggleNav = () => {
+  toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
-  };
+  }
 
-  toggleModal = () => {
+  toggleModal() {
     this.setState({ isModalOpen: !this.state.isModalOpen });
-  };
+  }
 
-  handleLogin = event => {
+  handleLogin(event) {
     alert(
       `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
     );
     this.toggleModal();
     event.preventDefault();
-  };
+  }
 
   render() {
     return (
@@ -97,6 +101,7 @@ class Header extends Component {
             </Collapse>
           </div>
         </Navbar>
+
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
