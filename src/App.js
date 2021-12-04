@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 import './App.css';
 
+/**
+ * Redux store setup. Provider wraps main
+ */
 const store = ConfigureStore();
 
 class App extends Component {
@@ -20,4 +23,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;
