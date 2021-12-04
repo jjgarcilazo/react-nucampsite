@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-
 function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
@@ -29,7 +28,8 @@ function RenderCampsite({ campsite }) {
     </div>
   );
 }
-function RenderComments({ comments, addComment, campsiteId }) {
+
+function RenderComments({ comments, postComment, campsiteId }) {
   if (comments) {
     return (
       <div className="col-md-5 m-1">
@@ -50,7 +50,7 @@ function RenderComments({ comments, addComment, campsiteId }) {
             </div>
           );
         })}
-        <CommentForm campsiteId={campsiteId} addComment={addComment} />
+        <CommentForm campsiteId={campsiteId} postComment={postComment} />
       </div>
     );
   }
@@ -69,9 +69,10 @@ class CommentForm extends React.Component {
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
+
   handleSubmit = values => {
     this.toggleModal();
-    this.props.addComment(
+    this.props.postComment(
       this.props.campsiteId,
       values.rating,
       values.author,
@@ -191,7 +192,7 @@ function CampsiteInfo(props) {
           <RenderCampsite campsite={props.campsite} />
           <RenderComments
             comments={props.comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             campsiteId={props.campsite.id}
           />
         </div>
